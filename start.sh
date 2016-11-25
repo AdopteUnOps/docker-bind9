@@ -57,6 +57,12 @@ EOF
   else
     fowarders="forwarders {$BIND9_FORWARDERS};"
   fi
+  
+  if [[ -z "${BIND9_ALSO_NOTIFY}" ]];then
+    also_notify=""
+  else
+    also_notify="also_notify {$BIND9_ALSO_NOTIFY};"
+  fi  
 
   cat <<EOF > "/etc/bind/named.conf.options"
 options {
@@ -66,6 +72,7 @@ options {
         allow-query {any;};
         recursion yes;
 	${fowarders}
+	${also_notify}
 	dnssec-enable yes;
 	dnssec-validation yes;
 
