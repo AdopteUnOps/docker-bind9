@@ -61,7 +61,7 @@ EOF
   if [[ -z "${BIND9_ALSO_NOTIFY}" ]];then
     also_notify=""
   else
-    also_notify="also-notify {$BIND9_ALSO_NOTIFY};"
+    also_notify="also-notify {${BIND9_ALSO_NOTIFY};};"
   fi  
 
   cat <<EOF > "/etc/bind/named.conf.options"
