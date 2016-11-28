@@ -40,13 +40,13 @@ zone "${BIND9_ROOTDOMAIN}" {
 };
 EOF
   echo "Creating ${BIND9_ROOTDOMAIN} configuration"
-  cat <<EOF >> "/etc/bind/zones/db.${BIND9_ROOTDOMAIN}" 
+  cat <<EOF >> "/etc/bind/zones/db.${BIND9_ROOTDOMAIN}"
 @		IN SOA	ns.${BIND9_ROOTDOMAIN}. root.${BIND9_ROOTDOMAIN}. (
-				20041125   ; serial
-				604800     ; refresh (1 week)
-				86400      ; retry (1 day)
-				2419200    ; expire (4 weeks)
-				604800     ; minimum (1 week)
+				${BIND9_SOA_SERIAL}   ; serial
+				${BIND9_SOA_REFRESH}     ; refresh (1 week)
+				${BIND9_SOA_RETRY}      ; retry (1 day)
+				${BIND9_SOA_EXPIRE}    ; expire (4 weeks)
+				${BIND9_SOA_NEGATIVE_TTL}     ; negative ttl (1 week)
 				)
 			NS	ns.${BIND9_ROOTDOMAIN}.
 ns			A	${BIND9_IP}
@@ -57,12 +57,12 @@ EOF
   else
     fowarders="forwarders {$BIND9_FORWARDERS};"
   fi
-  
+
   if [[ -z "${BIND9_ALSO_NOTIFY}" ]];then
     also_notify=""
   else
     also_notify="also-notify {${BIND9_ALSO_NOTIFY};};"
-  fi  
+  fi
 
   cat <<EOF > "/etc/bind/named.conf.options"
 options {
