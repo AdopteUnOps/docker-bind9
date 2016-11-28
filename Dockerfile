@@ -6,7 +6,7 @@ RUN echo "locales locales/locales_to_be_generated multiselect en_US.UTF-8 UTF-8"
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update &&\
-    apt-get install locales bind9 curl -y \
+    apt-get install locales bind9 curl -y &&\
     apt-get clean
 
 RUN mkdir -p /var/run/named /etc/bind/zones &&\
