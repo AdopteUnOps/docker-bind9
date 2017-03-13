@@ -62,7 +62,8 @@ EOF
     also_notify=""
   else
     also_notify="also-notify {${BIND9_ALSO_NOTIFY};};"
-    echo "ns			A	${BIND9_ALSO_NOTIFY}" >> "/etc/bind/zones/db.${BIND9_ROOTDOMAIN}"
+    echo "			NS	ns2.${BIND9_ROOTDOMAIN}."
+    echo "ns2			A	${BIND9_ALSO_NOTIFY}" >> "/etc/bind/zones/db.${BIND9_ROOTDOMAIN}"
   fi
 
   cat <<EOF > "/etc/bind/named.conf.options"
