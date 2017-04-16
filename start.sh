@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ! -f /etc/bind/.stamp_installed ]]; then
+if [[ ! -f /etc/bind/.stamp_installed/ok ]]; then
   if [[ -z "${BIND9_ROOTDOMAIN}" ]];then
     echo "The variable BIND9_ROOTDOMAIN must be set"
     exit 1
@@ -84,7 +84,8 @@ options {
 EOF
 
   chown -R bind:bind /etc/bind/zones/
-  touch /etc/bind/.stamp_installed
+  mkdir /etc/bind/.stamp_installed
+  touch /etc/bind/.stamp_installed/ok
 fi
 
 ipv4=""
